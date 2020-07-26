@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
-    int level = 0;
+    int level;
+
+    enum Screen { MainMenu, Password, Win, Error };
+    Screen currentScreen = Screen.MainMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         ShowMainMenu();
-
     }
 
     void ShowMainMenu()
-    {
+    { // TODO handle differently depending on screen
         Terminal.ClearScreen();
         Debug.Log("     Hello World!");
         Terminal.WriteLine("What the hack?!");
@@ -34,27 +36,34 @@ public class Hacker : MonoBehaviour
 
         if (input == "1")
         {
+            level = 1;
             print("You choose 1");
             StartGame(1);
+            currentScreen = Screen.Password;
+        }
+        else if (input == "2")
+        {
+            level = 2;
+            print("You choose 2");
+            StartGame(level);
+            currentScreen = Screen.Password;
+        }
+        else if (input == "3")
+        {
+            level = 3;
+            print("You choose 3");
+            StartGame(level);
+            currentScreen = Screen.Password;
         }
         else if (input == "menu")
         {
             ShowMainMenu();
-        }
-        else if (input == "2")
-        {
-            print("You choose 2");
-            StartGame(2);
-        }
-        else if (input == "3")
-        {
-            print("You choose 3");
-            StartGame(3);
+            currentScreen = Screen.MainMenu;
         }
         else
         {
             InvalidInput();
-            
+            currentScreen = Screen.Error;
         }
     }
 
@@ -65,8 +74,10 @@ public class Hacker : MonoBehaviour
 
     void InvalidInput()
     {
+        level = 0;
         print("ERROR Choose 1, 2 or 3");
-        Terminal.WriteLine("ERROR Choose 1, 2 or 3");        
+        Terminal.WriteLine("ERROR Choose 1, 2 or 3");
+        currentScreen = Screen.MainMenu;
     }
 
 }
