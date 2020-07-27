@@ -3,10 +3,11 @@
 public class Hacker : MonoBehaviour
 {
     // Game Configuration 
-    string[] password_easy = { "Coco", "Joko", "Swinia", "Lecisz" };
-    string[] password_medium = { "Coco", "Joko", "Swinia", "Lecisz" };
+    string[] password_easy = { "Print", "Dogel", "Foxyg3n", "MK" };
+    string[] password_medium = { "Potato", "Tomatoes", "Cucumber", "Watermelon" };
     string[] password_hard = { "Coco", "Joko", "Swinia", "Lecisz" };
 
+   
     // Variables
     int level;
     string password;
@@ -26,10 +27,10 @@ public class Hacker : MonoBehaviour
         Terminal.ClearScreen();
         Terminal.WriteLine("What do you want to hack today?");
         Terminal.WriteLine("_______________________________");
-        Terminal.WriteLine("Your crush facebook account? [easy]");
-        Terminal.WriteLine("Public library? [medium]");
-        Terminal.WriteLine("MCIS global servers? [hard]");
-        Terminal.WriteLine("Press 1,2 or 3 from your keyboard");
+        Terminal.WriteLine("1. Your crush facebook account? [easy]");
+        Terminal.WriteLine("2. Public library? [medium]");
+        Terminal.WriteLine("3. MCIS global servers? [hard]");
+        Terminal.WriteLine("Type 1,2 or 3 from your keyboard");
     }
 
     // only handle the main menu
@@ -92,10 +93,10 @@ public class Hacker : MonoBehaviour
         switch(level)
         {
             case 1:
-                password = password_easy[1];
+                password = password_easy[Random.Range(0, password_easy.Length)];
                 break;
             case 2:
-                password = password_medium[1];
+                password = password_medium[Random.Range(0, password_medium.Length)];
                 break;
             case 3:
                 password = password_hard[1];
