@@ -3,6 +3,7 @@
 public class Hacker : MonoBehaviour
 {
     // Game Configuration 
+
     string[] password_easy = { "Print", "Dogel", "Foxyg3n", "MK" };
     string[] password_medium = { "Potato", "Tomatoes", "Cucumber", "Watermelon" };
     string[] password_hard = { "Coco", "Joko", "Swinia", "Lecisz" };
@@ -106,15 +107,12 @@ public class Hacker : MonoBehaviour
                 break;
                 
         }
-
-
         Terminal.WriteLine("Enter your password");
     }
 
     void InvalidInput()
     {
         level = 0;
-        print("ERROR Choose 1, 2 or 3");
         Terminal.WriteLine("ERROR Choose 1, 2 or 3");
         currentScreen = Screen.MainMenu;
     }
@@ -123,11 +121,42 @@ public class Hacker : MonoBehaviour
     {
         if (input == password)
         {
-            Terminal.WriteLine("Well Done!");
+            DisplayWinScreen();
         } 
         else 
         {
             Terminal.WriteLine("Wrong Password");
+        }
+    }
+
+    void DisplayWinScreen() {
+            currentScreen = Screen.Win;
+            Terminal.ClearScreen();
+            ShowLevelReward();
+        }
+
+    void ShowLevelReward() {
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine(@"
+                
+                You won a Book!
+                    ______ ______
+                  _/      Y      \_
+                 // ~~ ~~ | ~~ ~  \\
+                // ~ ~ ~~ | ~~~ ~~ \\      
+               //________.|.________\\     
+               `----------`-'----------'
+                ");
+                break;
+
+            case 2:
+                Terminal.WriteLine(@"
+                You won a tallon!
+
+                ");
+                break;
         }
     }
 
