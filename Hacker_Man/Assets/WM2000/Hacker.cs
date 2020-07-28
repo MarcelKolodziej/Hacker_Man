@@ -3,10 +3,11 @@
 public class Hacker : MonoBehaviour
 {
     // Game Configuration 
+    const string menu = "Type 'menu' to restart";
 
     string[] password_easy = { "Print", "Dogel", "Foxyg3n", "MK" };
     string[] password_medium = { "Potato", "Tomatoes", "Cucumber", "Watermelon" };
-    string[] password_hard = { "Coco", "Joko", "Swinia", "Lecisz" };
+    string[] password_hard = { "Minecraft", "Fortnite", "LeagueOfLegends", "Diablo" };
 
    
     // Variables
@@ -63,17 +64,17 @@ public class Hacker : MonoBehaviour
         if (input == "1")
         {
             password = password_easy[1];
-            StartGame();
+            AskForPassword();
         }
         else if (input == "2")
         {
             password = password_medium[1];
-            StartGame();
+            AskForPassword();
         }
         else if (input == "3")
         {
             password = password_hard[1];
-            StartGame();
+            AskForPassword();
         }
         else if (input == "menu")
         {
@@ -87,11 +88,19 @@ public class Hacker : MonoBehaviour
         }
     }
 
-    void StartGame()
+    void AskForPassword()
     {
         currentScreen = Screen.Password;
         Terminal.ClearScreen();
-        switch(level)
+        SetRandomPassword();
+
+        Terminal.WriteLine("Your password is hint:" + password.Anagram());
+        Terminal.WriteLine(menu);
+    }
+
+    void SetRandomPassword()
+    {
+        switch (level)
         {
             case 1:
                 password = password_easy[Random.Range(0, password_easy.Length)];
@@ -100,17 +109,14 @@ public class Hacker : MonoBehaviour
                 password = password_medium[Random.Range(0, password_medium.Length)];
                 break;
             case 3:
-                password = password_hard[1];
-                break;
+                password = password_hard[Random.Range(0, password_hard.Length)];
+                 break;
             default:
                 Debug.Log("I dont know you!");
                 break;
-                
         }
-        Terminal.WriteLine("Enter your password");
     }
-
-    void InvalidInput()
+   void InvalidInput()
     {
         level = 0;
         Terminal.WriteLine("ERROR Choose 1, 2 or 3");
@@ -125,7 +131,7 @@ public class Hacker : MonoBehaviour
         } 
         else 
         {
-            Terminal.WriteLine("Wrong Password");
+            AskForPassword();
         }
     }
 
@@ -140,7 +146,6 @@ public class Hacker : MonoBehaviour
         {
             case 1:
                 Terminal.WriteLine(@"
-                
                 You won a Book!
                     ______ ______
                   _/      Y      \_
@@ -149,16 +154,21 @@ public class Hacker : MonoBehaviour
                //________.|.________\\     
                `----------`-'----------'
                 ");
+                Terminal.WriteLine(menu);
                 break;
-
             case 2:
                 Terminal.WriteLine(@"
-                You won a tallon!
-
+            You won GG!
                 ");
+                Terminal.WriteLine(menu);
+                break;
+            case 3:
+                Terminal.WriteLine(@"You are the best, here is your coupon!
+                ");
+                break;
+            default:
+                Debug.LogError("Invalid level reached!");
                 break;
         }
     }
-
-
 }
